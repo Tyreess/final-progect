@@ -1,5 +1,13 @@
 from fastapi import FastAPI
 
+toors = [
+    {
+        'id': 1,
+        'country': 'Franche',
+        'price': 10000
+}
+]
+
 app = FastAPI(
     description='first site'
 )
@@ -8,11 +16,9 @@ app = FastAPI(
 def index():
     return {'status': 200}
 
-@app.get('/toor')
-def toor_int(book_id: int):
-    return {'{toor_id}': book_id}
-
-
 @app.get('/toor/{toor_id}')
-def toor_str(book_id: str):
-    return {'{toor_id_str}': book_id}
+def toor(toor_id: int):
+    for toor in toors:
+        if toor_id == toor['id']:
+            return toor
+    return {}
